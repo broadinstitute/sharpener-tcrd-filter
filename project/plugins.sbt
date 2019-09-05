@@ -1,0 +1,1 @@
+../web/project/plugins.sbt
