@@ -12,12 +12,11 @@
 package sharpener.tcrd.model
 
 case class Parameter(
-/* Name of the parameter. */
+  /* Name of the parameter. */
   name: String,
   /* Type of the parameter, one of 'Boolean', 'int', 'double', 'string'. */
   `type`: String,
   /* Default value of the parameter. */
   `default`: String,
   /* Allowed values for the parameter. */
-  allowed_values: Option[List[String]]
-  )
+  allowed_values: Option[List[String]])

@@ -12,9 +12,8 @@
 package sharpener.tcrd.model
 
 case class Gene_info(
-/* Id of the gene. */
+  /* Id of the gene. */
   gene_id: String,
-    identifiers: Option[Gene_info_identifiers],
+  identifiers: Option[Gene_info_identifiers],
   /* Additional information about the gene and provenance about gene-list menbership. Sharpener will use myGene.info to add the following attributes to every gene: 'gene_symbol',  'entrez_gene_id', 'HGNC', 'MIM', 'ensembl_gene_id', 'synonyms', 'gene_name',  and 'myGene.info id'. Multiple synonyms and ensembl_gene_id are separated by semicolons. */
-  attributes: Option[List[Attribute]]
-  )
+  attributes: Option[List[Attribute]])

@@ -13,5 +13,4 @@ package sharpener.tcrd.model
 
 case class Property(
   name: String,
-    value: String
-  )
+  value: String)

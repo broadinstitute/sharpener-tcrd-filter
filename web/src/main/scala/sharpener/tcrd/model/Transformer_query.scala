@@ -12,8 +12,7 @@
 package sharpener.tcrd.model
 
 case class Transformer_query(
-/* List of genes that will be transformed. Required for expanders and filters; should be omitted for producers. */
+  /* List of genes that will be transformed. Required for expanders and filters; should be omitted for producers. */
   genes: Option[List[Gene_info]],
   /* Values that control the behavior of the transformer. Names of the controls must match the names specified in the transformer's definition and values must match types (and possibly  allowed_values) specified in the transformer's definition. */
-  controls: List[Property]
-  )
+  controls: List[Property])
