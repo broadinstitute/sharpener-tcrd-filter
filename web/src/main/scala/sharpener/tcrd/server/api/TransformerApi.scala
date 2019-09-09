@@ -44,10 +44,11 @@ class TransformerApi(implicit val swagger: Swagger) extends ScalatraServlet
     parameters (bodyParam[Transformer_query]("query").description("")))
 
   post("/transform", operation(transformPostOperation)) {
-
     val query = parsedBody.extract[Transformer_query]
-
-    TransformerBackend.transform(query)
+    TransformerBackend.transform(query) match {
+      case Left(error) => error.message
+      case Right(gene_infos) => gene_infos
+    }
   }
 
   val transformerInfoGetOperation = (apiOperation[Transformer_info]("transformerInfoGet")
@@ -55,7 +56,10 @@ class TransformerApi(implicit val swagger: Swagger) extends ScalatraServlet
     parameters ())
 
   get("/transformer_info", operation(transformerInfoGetOperation)) {
-    TransformerBackend.getTransformerInfo
+    TransformerBackend.getTransformerInfo match {
+      case Left(error) => error.message
+      case Right(transformer_info) => transformer_info
+    }
   }
 
 }
