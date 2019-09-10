@@ -19,7 +19,7 @@ object TransformerBackend {
   def getTransformerInfo: Either[Error, Transformer_info] = {
     println("URI: " + Uri(URI.create(baseUri + "/possibleFilters")))
     val request = sttp.get(Uri(URI.create(baseUri + "/possibleFilters"))).response(asJson[Seq[FilterOptions]])
-    implicit val backend = HttpURLConnectionBackend()
+    implicit val backend: SttpBackend[Id, Nothing] = HttpURLConnectionBackend()
     val response: Id[Response[Either[DeserializationError[circe.Error], Seq[FilterOptions]]]] = request.send()
     response.body match {
       case Left(message) => Left(Error(message))
@@ -28,8 +28,10 @@ object TransformerBackend {
         val name = "TCRD-Filter"
         val function = "filter"
         val description = "Filters by condition based on TCRD data."
-        val fieldNameParam = Parameter("field", "string", "", None)
-        val opNameParam = Parameter("op", "string", "", None)
+        val fields = filterOptionsList.map(_.field).toList
+        val ops = filterOptionsList.to[Set].flatMap(_.ops).toList.sortBy(s => s)
+        val fieldNameParam = Parameter("field", "string", "", Some(fields))
+        val opNameParam = Parameter("op", "string", "", Some(ops))
         val valueParam = Parameter("value", "string", "", None)
         val parameters = List(fieldNameParam, opNameParam, valueParam)
         val required_attributes = List.empty[String]
@@ -59,7 +61,7 @@ object TransformerBackend {
             }.toMap
             val geneIds = geneInfosById.keys.toList
             val backendQuery = GenesFilterQuery(geneIds, List(filter))
-            implicit val backend = HttpURLConnectionBackend()
+            implicit val backend: SttpBackend[Id, Nothing] = HttpURLConnectionBackend()
             val response =
               sttp.post(Uri(URI.create(baseUri + "/filterGenes"))).body(backendQuery).response(asJson[List[String]]).send()
             response.body match {
