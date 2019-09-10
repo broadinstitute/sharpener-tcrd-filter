@@ -34,7 +34,7 @@ object TransformerBackend {
         val opNameParam = Parameter("op", "string", "", Some(ops))
         val valueParam = Parameter("value", "string", "", None)
         val parameters = List(fieldNameParam, opNameParam, valueParam)
-        val required_attributes = List.empty[String]
+        val required_attributes = List("identifiers.entrez")
         val transformer_info = Transformer_info(name, function, description, parameters, required_attributes)
         Right(transformer_info)
     }
