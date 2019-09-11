@@ -13,6 +13,5 @@ package sharpener.tcrd.model
 
 case class Attribute(
   name: String,
-    value: String,
-    source: Option[String]
-  )
+  value: String,
+  source: Option[String])

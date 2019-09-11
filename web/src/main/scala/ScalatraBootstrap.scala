@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  */
 
-
 import sharpener.tcrd.server.api._
 import io.swagger.app.{ ResourcesApp, SwaggerApp }
 import javax.servlet.ServletContext
@@ -21,7 +20,7 @@ class ScalatraBootstrap extends LifeCycle {
   override def init(context: ServletContext) {
     try {
       context mount (new TransformerApi, "/remove_genes_filter/Transformer/*")
-      
+
       context mount (new ResourcesApp, "/api-docs/*")
     } catch {
       case e: Throwable => e.printStackTrace()

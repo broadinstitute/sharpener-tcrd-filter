@@ -12,7 +12,7 @@
 package sharpener.tcrd.model
 
 case class Parameter(
-/* Name of the parameter. */
+  /* Name of the parameter. */
   name: String,
   /* Type of the parameter, one of 'Boolean', 'int', 'double', 'string'. */
   `type`: String,
@@ -23,5 +23,4 @@ case class Parameter(
   /* Suggested value range for the parameter. */
   suggested_values: Option[String],
   /* URL to search for suitable parameter values. */
-  lookup_url: Option[String]
-  )
+  lookup_url: Option[String])

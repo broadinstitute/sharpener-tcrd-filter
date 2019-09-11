@@ -9,7 +9,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  */
 
-
 package sharpener.tcrd.server.api
 
 import sharpener.tcrd.model.Gene_info
@@ -39,29 +38,28 @@ class TransformerApi(implicit val swagger: Swagger) extends ScalatraServlet
     contentType = formats("json")
     response.headers += ("Access-Control-Allow-Origin" -> "*")
   }
-  
 
   val transformPostOperation = (apiOperation[List[Gene_info]]("transformPost")
-      summary ""
-      parameters(bodyParam[Transformer_query]("query").description(""))
-  )
+    summary ""
+    parameters (bodyParam[Transformer_query]("query").description("")))
 
-  post("/transform",operation(transformPostOperation)) {
-    
-    
-          val query = parsedBody.extract[Transformer_query]
-
-    println("query: " + query)
+  post("/transform", operation(transformPostOperation)) {
+    val query = parsedBody.extract[Transformer_query]
+    TransformerBackend.transform(query) match {
+      case Left(error) => error.message
+      case Right(gene_infos) => gene_infos
+    }
   }
 
-  
-
   val transformerInfoGetOperation = (apiOperation[Transformer_info]("transformerInfoGet")
-      summary "Retrieve transformer info"
-      parameters()
-  )
+    summary "Retrieve transformer info"
+    parameters ())
 
-  get("/transformer_info",operation(transformerInfoGetOperation)) {
+  get("/transformer_info", operation(transformerInfoGetOperation)) {
+    TransformerBackend.getTransformerInfo match {
+      case Left(error) => error.message
+      case Right(transformer_info) => transformer_info
+    }
   }
 
 }

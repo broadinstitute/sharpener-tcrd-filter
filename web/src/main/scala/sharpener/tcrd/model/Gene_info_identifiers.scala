@@ -12,7 +12,7 @@
 package sharpener.tcrd.model
 
 case class Gene_info_identifiers(
-/* Entrez gene id (CURIE). */
+  /* Entrez gene id (CURIE). */
   entrez: Option[String],
   /* HGNC gene id (CURIE). */
   hgnc: Option[String],
@@ -21,5 +21,4 @@ case class Gene_info_identifiers(
   /* ENSEMBL gene id (CURIE). */
   ensembl: Option[List[String]],
   /* myGene.info primary id. */
-  mygene_info: Option[String]
-  )
+  mygene_info: Option[String])

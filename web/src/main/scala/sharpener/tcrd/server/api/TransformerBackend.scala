@@ -30,9 +30,9 @@ object TransformerBackend {
         val description = "Filters by condition based on TCRD data."
         val fields = filterOptionsList.map(_.field).toList
         val ops = filterOptionsList.to[Set].flatMap(_.ops).toList.sortBy(s => s)
-        val fieldNameParam = Parameter("field", "string", "", Some(fields))
-        val opNameParam = Parameter("op", "string", "", Some(ops))
-        val valueParam = Parameter("value", "string", "", None)
+        val fieldNameParam = Parameter("field", "string", "", Some(fields), None, None)
+        val opNameParam = Parameter("op", "string", "", Some(ops), None, None)
+        val valueParam = Parameter("value", "string", "", None, None, None)
         val parameters = List(fieldNameParam, opNameParam, valueParam)
         val required_attributes = List("identifiers.entrez")
         val transformer_info = Transformer_info(name, function, description, parameters, required_attributes)
@@ -56,7 +56,7 @@ object TransformerBackend {
           case None => Left(Error("Need list of genes"))
           case Some(gene_infos) =>
             val geneInfosById = gene_infos.collect {
-              case gene_info @ Gene_info(_, Some(Gene_info_identifiers(Some(entrez), _, _, _)), _) =>
+              case gene_info @ Gene_info(_, Some(Gene_info_identifiers(Some(entrez), _, _, _, _)), _) =>
                 (entrez, gene_info)
             }.toMap
             val geneIds = geneInfosById.keys.toList

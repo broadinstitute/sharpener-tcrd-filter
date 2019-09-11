@@ -12,7 +12,7 @@
 package sharpener.tcrd.model
 
 case class Transformer_info(
-/* Name of the transformer. */
+  /* Name of the transformer. */
   name: String,
   /* Function of the transformer, one of 'producer', 'expander', 'filter'. */
   function: String,
@@ -21,5 +21,4 @@ case class Transformer_info(
   /* Parameters used to control the transformer. */
   parameters: List[Parameter],
   /* Gene attributes required by the transformer */
-  required_attributes: List[String]
-  )
+  required_attributes: List[String])
