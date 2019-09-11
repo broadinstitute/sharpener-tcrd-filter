@@ -25,9 +25,9 @@ object TransformerBackend {
       case Left(message) => Left(Error(message))
       case Right(Left(DeserializationError(_, _, message))) => Left(Error(message))
       case Right(Right(filterOptionsList)) =>
-        val name = "TCRD-Filter"
+        val name = "Pharos filter"
         val function = "filter"
-        val description = "Filters by condition based on TCRD data."
+        val description = "Filters by condition based on Pharos data."
         val fields = filterOptionsList.map(_.field).toList
         val ops = filterOptionsList.to[Set].flatMap(_.ops).toList.sortBy(s => s)
         val fieldNameParam = Parameter("field", "string", "", Some(fields), None, None)
