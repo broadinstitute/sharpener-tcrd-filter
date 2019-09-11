@@ -57,7 +57,7 @@ object TransformerBackend {
           case Some(gene_infos) =>
             val geneInfosById = gene_infos.collect {
               case gene_info @ Gene_info(_, Some(Gene_info_identifiers(Some(entrez), _, _, _, _)), _) =>
-                (entrez, gene_info)
+                (entrez.split(":").last, gene_info)
             }.toMap
             val geneIds = geneInfosById.keys.toList
             val backendQuery = GenesFilterQuery(geneIds, List(filter))
