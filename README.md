@@ -10,7 +10,7 @@ Then open this with SBT, do "project web" and "jetty:start".
 Either run both services on the same machine, or adjust base URL in sharpener.tcrd.server.api.TransformerBackend.
 
 URL of info is
-[http://localhost:8080/remove_genes_filter/Transformer/transformer_info]
+[http://localhost:8080/remove_genes_filter/Transformer/transformer_info](http://localhost:8080/remove_genes_filter/Transformer/transformer_info)
 
 ## API specs
 
